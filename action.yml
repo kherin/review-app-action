@@ -1,5 +1,5 @@
 name: 'Annotate Pull Request with Link'
-description: 'Annotate a pull request\'s description with a link which will redirect the viewer to a review app'
+description: 'Annotate a pull request description with a link which will redirect the viewer to a review app'
 branding:
   icon: 'message-square'
   color: 'green'
