@@ -30,7 +30,9 @@ try {
     repo_name,
     pull_number,
     annotation_body,
-  });
+  }).catch(error) {
+      console.log("Thrown from octokit: ", error);
+  };
 
   console.log(`Annotation - ${annotationTitle} has been successful.`);
 } catch (error) {
