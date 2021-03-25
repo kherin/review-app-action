@@ -11,7 +11,11 @@ async function run() {
     // pull request details
     const payload = JSON.stringify(github.context.payload, undefined, 2);
 
+    console.log("payload: ", payload);
+
     const { pull_request, repository, number: pull_number } = payload;
+
+    console.log("--> pull_request, ", pull_request);
     const pull_name = pull_request["head"]["ref"];
     const {
       full_name: repo_pathname,
