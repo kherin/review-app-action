@@ -3,6 +3,9 @@ description: >-
   Annotate a pull request description with a link which will redirect the viewer
   to a review app
 inputs:
+  token:
+    description: GitHub Access Token scoped to access the repository
+    required: true
   annotation-title:
     description: The title of the url
     required: true
