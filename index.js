@@ -33,7 +33,7 @@ async function run() {
       annotation_body,
     });
 
-    console.log(`Annotation - ${annotationTitle} has been successful`);
+    console.log(`Annotation - ${annotationTitle} has been successful.`);
   } catch (error) {
     core.setFailed(error.message);
   }
