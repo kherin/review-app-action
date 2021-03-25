@@ -27,10 +27,10 @@ try {
 
   octokit.pulls
     .createReviewComment({
-      owner_name,
-      repo_name,
+      owner: owner_name,
+      repo: repo_name,
       pull_number,
-      annotation_body,
+      body: annotation_body,
     })
     .catch((error) => {
       console.log("Thrown from octokit: ", error);
