@@ -1,42 +1,42 @@
 const core = require("@actions/core");
 const github = require("@actions/github");
 
-try {
-  // inputs
-  const token = core.getInput("token");
-  const annotationTitle = core.getInput("annotation-title");
-  const annotationUrl = core.getInput("annotation-url");
+async function run() {
+  try {
+    // inputs
+    const token = core.getInput("token");
+    const annotationTitle = core.getInput("annotation-title");
+    const annotationUrl = core.getInput("annotation-url");
 
-  // pull request details
-  const payload = JSON.stringify(github.context.payload, undefined, 2);
+    // pull request details
+    const { payload } = github.context;
 
-  console.log("payload: ", payload);
+    const { pull_request, repository, number: pull_number } = payload;
+    const pull_name = pull_request["head"]["ref"];
+    const {
+      full_name: repo_pathname,
+      owner: repo_owner,
+      name: repo_name,
+    } = repository;
+    const owner_name = repo_owner["login"];
 
-  const pull_request = payload["pull_request"];
-  const repository = payload["repository"];
-  const pull_number = payload["number"];
+    // build annotation text
+    const pull_request_path = `${repo_pathname}/tree/${pull_name}`;
+    const annotation_body = `${annotationUrl}${pull_request_path}`;
 
-  console.log("--> pull_request, ", pull_request);
-  const pull_name = pull_request["head"]["ref"];
-  const repo_pathname = repository["full_name"];
-  const repo_owner = repository["owner"];
-  const repo_name = repository["name"];
-  const owner_name = repo_owner["login"];
+    const octokit = github.getOctokit(token);
 
-  // build annotation text
-  const pull_request_path = `${repo_pathname}/tree/${pull_name}`;
-  const annotation_body = `${annotationUrl}${pull_request_path}`;
+    await octokit.pulls.createReviewComment({
+      owner_name,
+      repo_name,
+      pull_number,
+      annotation_body,
+    });
 
-  const octokit = github.getOctokit(token);
-
-  octokit.pulls.createReviewComment({
-    owner_name,
-    repo_name,
-    pull_number,
-    annotation_body,
-  });
-
-  console.log(`Annotation - ${annotationTitle} has been successful.`);
-} catch (error) {
-  core.setFailed(error.message);
+    console.log(`Annotation - ${annotationTitle} has been successful`);
+  } catch (error) {
+    core.setFailed(error.message);
+  }
 }
+
+run();
