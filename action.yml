@@ -1,18 +1,17 @@
-name: 'Annotate Pull Request with Link'
-description: 'Annotate a pull request description with a link which will redirect the viewer to a review app'
-branding:
-  icon: 'message-square'
-  color: 'green'
+name: Annotate Pull Request with Link
+description: >-
+  Annotate a pull request description with a link which will redirect the viewer
+  to a review app
 inputs:
   annotation-title:
-    description: 'The title of the url'
+    description: The title of the url
     required: true
   annotation-url:
-    description: 'Where to redirect the viewer'
+    description: Where to redirect the viewer
     required: true
 outputs:
   annotation-url:
-    description: 'The url constructed based on the branch of the pull request'
+    description: The url constructed based on the branch of the pull request
 runs:
-  using: 'node12'
-  main: 'index.js'
+  using: node12
+  main: index.js
