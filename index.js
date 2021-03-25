@@ -31,6 +31,7 @@ try {
       repo: repo_name,
       pull_number,
       body: annotation_body,
+      event: "COMMENT",
     })
     .catch((error) => {
       console.log("Thrown from octokit: ", error);
