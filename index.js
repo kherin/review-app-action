@@ -26,7 +26,7 @@ try {
   const octokit = github.getOctokit(token);
 
   octokit.pulls
-    .createReviewComment({
+    .createReview({
       owner: owner_name,
       repo: repo_name,
       pull_number,
