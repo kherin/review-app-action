@@ -13,15 +13,15 @@ async function run() {
 
     console.log("payload: ", payload);
 
-    const { pull_request, repository, number: pull_number } = payload;
+    const pull_request = payload["pull_request"];
+    const repository = payload["repository"];
+    const pull_number = payload["number"];
 
     console.log("--> pull_request, ", pull_request);
     const pull_name = pull_request["head"]["ref"];
-    const {
-      full_name: repo_pathname,
-      owner: repo_owner,
-      name: repo_name,
-    } = repository;
+    const repo_pathname = repository["full_name"];
+    const repo_owner = repository["owner"];
+    const repo_name = repository["name"];
     const owner_name = repo_owner["login"];
 
     // build annotation text
